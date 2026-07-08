@@ -49,6 +49,13 @@ theme is optional everywhere and overridable anywhere.</p>
 </section>
 
 <section>
+  <h2>Themes — your vibe, one click, every client</h2>
+  <p class="nc-muted">Applies instantly and persists across the whole
+  nostr-client origin (monty picks it up in Settings):</p>
+  <nostr-theme-picker></nostr-theme-picker>
+</section>
+
+<section>
   <h2>Live components wearing the theme</h2>
   <div class="row"><nostr-login></nostr-login></div>
   <nostr-feed limit="4"></nostr-feed>
@@ -63,6 +70,9 @@ theme is optional everywhere and overridable anywhere.</p>
 <script type="module">
   import 'https://nostr-client.github.io/login/login.js'
   import 'https://nostr-client.github.io/feed/feed.js'
+  import './themes.js'
+  const { restoreTheme } = await import('./themes.js')
+  restoreTheme()
 
   const TOKENS = ['bg','surface','inset','ink','soft','faint','line','accent','accent-soft','ok','danger']
   const grid = document.getElementById('swatches')
