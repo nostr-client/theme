@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>theme — nostr-client design tokens</title>
+<link rel="stylesheet" href="./theme.css">
+<style>
+  body { max-width: 44rem; margin: 2.5rem auto; padding: 0 1.2rem 4rem; }
+  h1 { font-size: 1.5rem; } h1 a { text-decoration: none; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: .7rem; margin: 1rem 0 2rem; }
+  .swatch { border-radius: var(--nc-radius-sm); border: 1px solid var(--nc-line); overflow: hidden; font-size: .78rem; }
+  .swatch .chip { height: 3.2rem; }
+  .swatch .label { padding: .4rem .6rem; background: var(--nc-surface); }
+  .swatch .label code { border: none; background: none; padding: 0; color: var(--nc-soft); }
+  .row { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; }
+  section { margin: 2.2rem 0; }
+</style>
+</head>
+<body>
+<h1><a href="https://github.com/nostr-client/theme">nostr-client / theme</a></h1>
+<p class="nc-muted">One CSS file of design tokens. Components read only the
+<code>--nc-*</code> custom properties (they inherit through shadow DOM), so this
+theme is optional everywhere and overridable anywhere.</p>
+
+<section>
+  <h2>Tokens</h2>
+  <div class="swatches" id="swatches"></div>
+</section>
+
+<section>
+  <h2>Primitives</h2>
+  <div class="row">
+    <button class="nc-btn">Primary</button>
+    <button class="nc-btn-ghost">Ghost</button>
+    <span class="nc-muted">muted text</span>
+    <span class="nc-faint">faint text</span>
+    <code>code token</code>
+  </div>
+  <div class="nc-card">A card: <code>.nc-card</code> — surface, hairline, soft shadow, 14px radius.</div>
+</section>
+
+<section>
+  <h2>Live components wearing the theme</h2>
+  <div class="row"><nostr-login></nostr-login></div>
+  <nostr-feed limit="4"></nostr-feed>
+</section>
+
+<section>
+  <h2>Reskin in two lines</h2>
+  <pre><code>&lt;link rel="stylesheet" href="https://nostr-client.github.io/theme/theme.css"&gt;
+&lt;style&gt; :root { --nc-accent: #0b7a4b; --nc-font-content: Georgia, serif; } &lt;/style&gt;</code></pre>
+</section>
+
+<script type="module">
+  import 'https://nostr-client.github.io/login/login.js'
+  import 'https://nostr-client.github.io/feed/feed.js'
+
+  const TOKENS = ['bg','surface','inset','ink','soft','faint','line','accent','accent-soft','ok','danger']
+  const grid = document.getElementById('swatches')
+  for (const t of TOKENS) {
+    const el = document.createElement('div')
+    el.className = 'swatch'
+    const chip = document.createElement('div')
+    chip.className = 'chip'
+    chip.style.background = `var(--nc-${t})`
+    const label = document.createElement('div')
+    label.className = 'label'
+    const code = document.createElement('code')
+    code.textContent = `--nc-${t}`
+    label.append(code)
+    el.append(chip, label)
+    grid.append(el)
+  }
+</script>
+</body>
+</html>

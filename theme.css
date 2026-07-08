@@ -1,0 +1,101 @@
+/*
+ * theme.css — the nostr-client design tokens + base page styles.
+ * No build. Light, calm, warm. AGPL-3.0-or-later.
+ *
+ * Components read ONLY the custom properties (they inherit through shadow
+ * DOM), with tasteful fallbacks — so this file is optional everywhere and
+ * overridable anywhere:
+ *
+ *   <link rel="stylesheet" href="https://nostr-client.github.io/theme/theme.css">
+ *
+ * Reskin a whole client by overriding tokens after the import:
+ *   :root { --nc-accent: #0b7a4b; --nc-font-content: Georgia, serif; }
+ */
+
+:root {
+  color-scheme: light;
+
+  /* type */
+  --nc-font: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --nc-font-content: var(--nc-font);   /* note bodies — zen swaps this for a serif */
+  --nc-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+  /* surfaces */
+  --nc-bg: #faf9f7;          /* warm paper */
+  --nc-surface: #ffffff;     /* cards */
+  --nc-inset: #f4f2ee;       /* wells, code, inputs */
+
+  /* ink */
+  --nc-ink: #201d26;
+  --nc-soft: #6d6a76;
+  --nc-faint: #a8a4b0;
+
+  /* lines + accents */
+  --nc-line: #e9e6e0;
+  --nc-accent: #7c3aed;
+  --nc-accent-ink: #ffffff;
+  --nc-accent-soft: #f2ecfd;
+  --nc-ok: #17864f;
+  --nc-danger: #c93a3a;
+
+  /* shape */
+  --nc-radius: 14px;
+  --nc-radius-sm: 9px;
+  --nc-shadow: 0 1px 2px rgb(32 27 51 / 4%), 0 6px 24px -10px rgb(32 27 51 / 10%);
+  --nc-shadow-pop: 0 2px 6px rgb(32 27 51 / 8%), 0 16px 48px -12px rgb(32 27 51 / 18%);
+}
+
+/* ---- base page styles (opt-in by linking this file) ---- */
+
+body {
+  font-family: var(--nc-font);
+  background: var(--nc-bg);
+  color: var(--nc-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { line-height: 1.25; letter-spacing: -0.015em; }
+a { color: var(--nc-accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+code, pre {
+  font-family: var(--nc-mono);
+  background: var(--nc-inset);
+  border: 1px solid var(--nc-line);
+  border-radius: 6px;
+  font-size: .88em;
+}
+code { padding: .12em .38em; }
+pre { padding: .9em 1.1em; overflow-x: auto; line-height: 1.5; }
+pre code { background: none; border: none; padding: 0; font-size: 1em; }
+
+/* ---- small helper classes for composed pages ---- */
+
+.nc-card {
+  background: var(--nc-surface);
+  border: 1px solid var(--nc-line);
+  border-radius: var(--nc-radius);
+  box-shadow: var(--nc-shadow);
+  padding: 1rem 1.1rem;
+}
+
+.nc-btn {
+  font: inherit; cursor: pointer;
+  background: var(--nc-accent); color: var(--nc-accent-ink);
+  border: none; border-radius: 999px;
+  padding: .5em 1.25em; font-weight: 600;
+  transition: filter .15s ease, transform .15s ease;
+}
+.nc-btn:hover { filter: brightness(1.08); }
+.nc-btn:active { transform: translateY(1px); }
+
+.nc-btn-ghost {
+  font: inherit; cursor: pointer;
+  background: transparent; color: var(--nc-ink);
+  border: 1px solid var(--nc-line); border-radius: 999px;
+  padding: .5em 1.25em;
+}
+.nc-btn-ghost:hover { background: var(--nc-inset); }
+
+.nc-muted { color: var(--nc-soft); }
+.nc-faint { color: var(--nc-faint); }
